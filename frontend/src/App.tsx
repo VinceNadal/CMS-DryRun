@@ -1,32 +1,21 @@
 import React from "react";
 import ContactList from "./components/ContactList";
-import { useState } from "react";
 import ContactForm from "./components/ContactForm";
-import { Contact } from "./interfaces/Contact";
+import { useContacts } from "./hooks/useContacts";
 
 function App() {
   // create a state variable for contacts
-  const [contacts, setContacts] = useState<Contact[]>([]);
-
-  const setContactsHandler = (contacts: Contact[]) => {
-    setContacts(contacts);
-  };
-
-  const addContactHandler = (contact: Contact) => {
-    setContacts((prevContacts) => {
-      return [...prevContacts, contact];
-    });
-  };
+  const [contacts, createNewContact] = useContacts();
 
   return (
     <div className="App">
       <h1>Contact Management</h1>
-      <p>using using .NET 6 WebAPI and ReactTS</p>
+      <p>Using .NET 6 WebAPI and ReactTS</p>
 
-      <ContactForm handleAddContact={addContactHandler} />
-      <ContactList contacts={contacts} handleSetContacts={setContactsHandler} />
+      <ContactForm handleCreateContact={createNewContact} />
+      <ContactList contacts={contacts} />
 
-      <p>© chan, tim, mac</p>
+      <footer className="footer">© chan, tim, mac</footer>
     </div>
   );
 }

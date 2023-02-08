@@ -1,0 +1,35 @@
+/* Style the container div element with margin and padding */
+.container {
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+
+/* Style the list container and add a vertical margin for each item */
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Style the list item as a card that is like a glass */
+.listItem {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* style list item text to be more readable */
+.listItemText {
+  font-size: 1.2rem;
+  margin: 5px 0;
+}

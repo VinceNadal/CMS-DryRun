@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Contact } from "../interfaces/Contact";
-import { createContact } from "../services/Api";
+import { CreateContact } from "../interfaces/CreateContact";
+import styles from "./ContactForm.module.css";
 
 interface Props {
-  handleAddContact: (contact: Contact) => void;
+  handleCreateContact: (contact: CreateContact) => Promise<void>;
 }
 
-export default function ContactForm({ handleAddContact }: Props) {
+export default function ContactForm({ handleCreateContact }: Props) {
   // create a state variable for the form inputs
   const [contact, setContact] = useState({
     firstName: "",
@@ -15,12 +15,22 @@ export default function ContactForm({ handleAddContact }: Props) {
     deliveryAddress: "",
   });
 
-  // create a function to handle the form submission
+  // Create a function to clear the form inputs
+  const clearForm = () => {
+    setContact({
+      firstName: "",
+      lastName: "",
+      physicalAddress: "",
+      deliveryAddress: "",
+    });
+  };
+
+  // create a function to handle the form submission and clear the form inputs
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(contact);
-    const createdContact = await createContact(contact);
-    handleAddContact(createdContact);
+    await handleCreateContact(contact);
+    clearForm();
   };
 
   // create a function to handle the form input changes
@@ -35,7 +45,8 @@ export default function ContactForm({ handleAddContact }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <h1 className={styles.formTitle}>Add Contact</h1>
       <label htmlFor="firstName">First Name</label>
       <input
         type="text"
@@ -43,6 +54,7 @@ export default function ContactForm({ handleAddContact }: Props) {
         name="firstName"
         value={contact.firstName}
         onChange={handleChange}
+        className={styles.formInput}
       />
 
       <label htmlFor="lastName">Last Name</label>
@@ -52,6 +64,7 @@ export default function ContactForm({ handleAddContact }: Props) {
         name="lastName"
         value={contact.lastName}
         onChange={handleChange}
+        className={styles.formInput}
       />
 
       <label htmlFor="physicalAddress">Physical Address</label>
@@ -61,6 +74,7 @@ export default function ContactForm({ handleAddContact }: Props) {
         name="physicalAddress"
         value={contact.physicalAddress}
         onChange={handleChange}
+        className={styles.formInput}
       />
 
       <label htmlFor="deliveryAddress">Delivery Address</label>
@@ -70,9 +84,12 @@ export default function ContactForm({ handleAddContact }: Props) {
         name="deliveryAddress"
         value={contact.deliveryAddress}
         onChange={handleChange}
+        className={styles.formInput}
       />
 
-      <button type="submit">Submit</button>
+      <button type="submit" className={styles.formButton}>
+        Submit
+      </button>
     </form>
   );
 }

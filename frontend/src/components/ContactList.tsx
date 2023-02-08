@@ -1,35 +1,29 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Contact } from "../interfaces/Contact";
-import { getContacts } from "../services/Api";
+import styles from "./ContactList.module.css";
 
 interface Props {
   contacts: Contact[];
-  handleSetContacts: (contacts: Contact[]) => void;
 }
 
-export default function ContactList({ contacts, handleSetContacts }: Props) {
-  // Read the contacts from the API using the useEffect hook with GetAllContacts
-
-  useEffect(() => {
-    // fetch the contacts from the API
-    // set the contacts in the state
-    (async () => {
-      handleSetContacts(await getContacts());
-    })();
-  }, []);
-
+export default function ContactList({ contacts }: Props) {
   // create a component that displays list of contacts using UL and LI tags
   // add a button to each contact to delete it
   return (
-    <div>
-      <ul>
+    <div className={styles.container}>
+      <ul className={styles.listContainer}>
         {contacts.map((contact) => (
-          <li key={contact.id}>
-            {contact.firstName} {contact.lastName}
-            <div>
-              {contact.physicalAddress}
-              {contact.deliveryAddress}
-            </div>
+          <li key={contact.id} className={styles.listItem}>
+            <p className={styles.listItemText}>
+              First Name: {contact.firstName}
+            </p>
+            <p className={styles.listItemText}>Last Name: {contact.lastName}</p>
+            <p className={styles.listItemText}>
+              Physical Address: {contact.physicalAddress}
+            </p>
+            <p className={styles.listItemText}>
+              Delivery Address: {contact.deliveryAddress}
+            </p>
           </li>
         ))}
       </ul>

@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Add css reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Create style for footer with black background and always set it at the bottom, but only until I scroll to it*/
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 1rem;
+  width: 100%;
+}
