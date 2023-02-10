@@ -11,7 +11,7 @@ on:
 jobs:
   # set up the working directory for the job to be the backend directory
   build:
-    
+    name: docker-build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
