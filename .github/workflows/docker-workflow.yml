@@ -1,0 +1,20 @@
+# Create a workflow that will build docker image on push and pull request events use the docker build actions to build the image
+
+name: Docker CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # set up the working directory for the job to be the backend directory
+  build:
+    
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        # use the Dockerfile in the backend directory and use the tag backend-api
+        run: docker build -t backend-api -f backend/Dockerfile .
