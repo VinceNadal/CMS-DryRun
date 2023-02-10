@@ -1,7 +1,7 @@
 ﻿using API.Models;
 using System.Text.Json;
 
-namespace API.Data
+namespace API.Data;
 {
     public class JsonFileRepository
     {
