@@ -16,5 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
+        working-directory: ./backend
         # use the Dockerfile in the backend directory and use the tag backend-api
-        run: docker build -t backend-api -f backend/Dockerfile .
+        run: docker build . -t backend-api 
